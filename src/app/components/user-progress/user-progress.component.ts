@@ -10,7 +10,6 @@ Chart.register(BarController, BarElement, CategoryScale, LinearScale, Legend);
   selector: 'app-user-progress',
   standalone:true,
   templateUrl: './user-progress.component.html',
-  styleUrls: ['./user-progress.component.scss'],
   imports:[CommonModule]
 })
 export class UserProgressComponent implements OnInit {

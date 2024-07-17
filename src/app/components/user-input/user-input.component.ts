@@ -10,7 +10,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   selector: 'app-user-input',
   standalone:true,
   templateUrl: './user-input.component.html',
-  styleUrls: ['./user-input.component.scss'],
   imports: [FormsModule,CommonModule,RouterModule,MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule, MatInputModule],
 })
 export class UserInputComponent {

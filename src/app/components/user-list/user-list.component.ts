@@ -14,7 +14,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   selector: 'app-user-list',
   standalone: true,
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
   imports: [
     FormsModule,
     MatInputModule,
@@ -33,20 +32,15 @@ export class UserListComponent implements OnInit {
   paginatedUsers: User[] = [];
   workoutTypes: string[] = ['All', 'Running', 'Cycling', 'Swimming', 'Yoga'];
   displayedColumns: string[] = ['name', 'workouts', 'numberOfWorkouts', 'totalWorkoutMinutes'];
-
-  // Pagination properties
   pageSize: number = 5;
   currentPage: number = 0;
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private userService: UserService) {}
-
   ngOnInit() {
     this.users = this.userService.getUsers(); 
     this.filteredUsers = [...this.users];
     this.updatePaginatedUsers();
   }
-
   filterUsers() {
     console.log('selectedWorkoutType', this.selectedWorkoutType);
     this.filteredUsers = this.users.filter((user: User) => {
@@ -65,8 +59,8 @@ export class UserListComponent implements OnInit {
   }
 
   getUsersWorkOutType(user: User): string {
-    if (!user || !user.workouts) return 'NA'; // Handle edge case
-    return user.workouts.map((w: Workout) => w.workoutType).join(', '); // Concatenate workout types into a string
+    if (!user || !user.workouts) return 'NA'; 
+    return user.workouts.map((w: Workout) => w.workoutType).join(', '); 
   }
 
   updatePaginatedUsers() {
