@@ -1,0 +1,18 @@
+<div class="p-4 bg-gray-100 rounded">
+  <div class="mb-4">
+    <label class="block mb-1">User Name*</label>
+    <input [(ngModel)]="userName" class="p-2 border rounded w-full" placeholder="Enter user name" />
+  </div>
+  <div class="mb-4">
+    <label class="block mb-1">Workout Type*</label>
+    <select [(ngModel)]="workoutType" class="p-2 border rounded w-full">
+      <option *ngFor="let type of workoutTypes" [value]="type">{{ type }}</option>
+    </select>
+  </div>
+  <div class="mb-4">
+    <label class="block mb-1">Workout Minutes*</label>
+    <input [(ngModel)]="workoutMinutes" type="number" class="p-2 border rounded w-full" placeholder="Enter minutes" />
+  </div>
+  <button (click)="addUserWorkout()" class="p-2 bg-blue-500 text-white rounded">Add Workout</button>
+  <a routerLink="userList">navigate other pages</a>
+</div>

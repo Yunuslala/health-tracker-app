@@ -1,0 +1,29 @@
+<div class="p-4 bg-gray-100 rounded">
+    <div class="mb-4">
+      <input [(ngModel)]="searchName" class="p-2 border rounded w-full" placeholder="Search by name" (input)="filterUsers()" />
+    </div>
+    <div class="mb-4">
+      <select [(ngModel)]="selectedWorkoutType" class="p-2 border rounded w-full" (change)="filterUsers()">
+        <option *ngFor="let type of workoutTypes" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+    <table class="w-full border-collapse">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="p-2 border">Name</th>
+          <th class="p-2 border">Workouts</th>
+          <th class="p-2 border">Number of Workouts</th>
+          <th class="p-2 border">Total Workout Minutes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers" class="border-t">
+          <td class="p-2 border">{{ user.name }}</td>
+          <td class="p-2 border">{{ getUsersWorkOutType(user)}}</td>
+          <td class="p-2 border">{{ user.workouts.length }}</td>
+          <td class="p-2 border">{{ getTotalMinutes(user) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
