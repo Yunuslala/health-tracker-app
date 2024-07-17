@@ -1,1 +1,16 @@
-<p>user-progress works!</p>
+<div class="p-4 mt-[20px] bg-gray-100 rounded">
+    <div class="flex justify-between w-[100%]">
+      <div class="w-[20%]  ">
+        <ul class="shadow-lg">
+          <li *ngFor="let user of users" class="py-2  border cursor-pointer flex justify-center"   [ngClass]="{'bg-gray-300': user === selectedUser, 'bg-white': user !== selectedUser}"  (click)="selectUser(user)">
+            {{ user.name }}
+          </li>
+        </ul>
+      </div>
+      <div class="w-[60%] shadow-lg p-6 bg-white">
+        <h2 class="text-xl mb-4">{{ selectedUser?.name }}'s workout progress</h2>
+        <canvas id="workoutChart"></canvas>
+      </div>
+    </div>
+  </div>
+  

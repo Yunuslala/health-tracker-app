@@ -1,18 +1,37 @@
-<div class="p-4 bg-gray-100 rounded">
-  <div class="mb-4">
-    <label class="block mb-1">User Name*</label>
-    <input [(ngModel)]="userName" class="p-2 border rounded w-full" placeholder="Enter user name" />
-  </div>
-  <div class="mb-4">
-    <label class="block mb-1">Workout Type*</label>
-    <select [(ngModel)]="workoutType" class="p-2 border rounded w-full">
-      <option *ngFor="let type of workoutTypes" [value]="type">{{ type }}</option>
-    </select>
-  </div>
-  <div class="mb-4">
-    <label class="block mb-1">Workout Minutes*</label>
-    <input [(ngModel)]="workoutMinutes" type="number" class="p-2 border rounded w-full" placeholder="Enter minutes" />
-  </div>
-  <button (click)="addUserWorkout()" class="p-2 bg-blue-500 text-white rounded">Add Workout</button>
-  <a routerLink="userList">navigate other pages</a>
+<div class="p-10 mt-5 flex flex-col w-[50%] border m-auto items-start justify-start bg-gray-100 rounded ">
+    <div class="w-[100%] flex items-start justify-start">
+        <div class="mb-4">
+            <mat-form-field class="example-full-width">
+                <mat-label>User Name</mat-label>
+                <input matInput [(ngModel)]="userName" class="p-2 border rounded w-full"
+                    placeholder="Enter user name" />
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="flex w-[100%] justify-between m-auto">
+        <div class="mb-4 ">
+            <mat-form-field>
+                <mat-label>Workout Type</mat-label>
+                <mat-select [(ngModel)]="workoutType" required>
+                    <mat-option *ngFor="let type of workoutTypes" [value]="type">{{ type }}</mat-option>
+                </mat-select>
+                @if (workoutType==" ") {
+                <mat-error>Please choose an animal</mat-error>
+                }
+            </mat-form-field>
+        </div>
+        <div class="mb-4 w-[60%]">
+
+            <mat-form-field class="example-full-width">
+                <mat-label>WorkOut Minutes</mat-label>
+                <input matInput [(ngModel)]="workoutMinutes" type="number" class="p-2  border rounded w-full"
+                    placeholder="Enter minutes" />
+            </mat-form-field>
+        </div>
+    </div>
+    <div>
+        <button (click)="addUserWorkout()" class="p-3 bg-white  text-blue-500 rounded-[50px]">Add Workout</button>
+    
+    </div>
+
 </div>

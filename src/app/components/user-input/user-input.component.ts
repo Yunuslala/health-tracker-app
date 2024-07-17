@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule} from "@angular/forms"
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @Component({
   selector: 'app-user-input',
   standalone:true,
   templateUrl: './user-input.component.html',
   styleUrls: ['./user-input.component.scss'],
-  imports: [FormsModule,CommonModule,RouterModule],
+  imports: [FormsModule,CommonModule,RouterModule,MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule, MatInputModule],
 })
 export class UserInputComponent {
   userName: string = '';
@@ -25,6 +27,8 @@ export class UserInputComponent {
       this.userName = '';
       this.workoutType = '';
       this.workoutMinutes = null;
+    }else{
+      alert("fill al the fields")
     }
   }
 }

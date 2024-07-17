@@ -7,6 +7,7 @@ export interface Workout {
   
 
 export interface User{
+    id:number,
     name:string,
     workouts:Workout[]
 }

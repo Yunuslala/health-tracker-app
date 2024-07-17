@@ -1,29 +1,48 @@
-<div class="p-4 bg-gray-100 rounded">
-    <div class="mb-4">
-      <input [(ngModel)]="searchName" class="p-2 border rounded w-full" placeholder="Search by name" (input)="filterUsers()" />
+<div class="p-4 mt-[20px] bg-gray-100 mx-auto rounded flex flex-col items-start jusitfy-start w-[90%]">
+  <div class="flex justify-between w-[100%]">
+    <div class="mb-4 w-[40%]">
+      <mat-form-field class="w-[100%]">
+        <input matInput type="search" [(ngModel)]="searchName" class="p-2 border rounded w-full"
+          placeholder="Search by name" (input)="filterUsers()" />
+
+      </mat-form-field>
     </div>
-    <div class="mb-4">
-      <select [(ngModel)]="selectedWorkoutType" class="p-2 border rounded w-full" (change)="filterUsers()">
-        <option *ngFor="let type of workoutTypes" [value]="type">{{ type }}</option>
-      </select>
+    <div class="mb-4 w-[40%]">
+      <mat-form-field class="w-[100%]">
+        <mat-select [(ngModel)]="selectedWorkoutType" (selectionChange)="filterUsers()">
+          <mat-option *ngFor="let type of workoutTypes" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
     </div>
-    <table class="w-full border-collapse">
-      <thead>
-        <tr class="bg-gray-200">
-          <th class="p-2 border">Name</th>
-          <th class="p-2 border">Workouts</th>
-          <th class="p-2 border">Number of Workouts</th>
-          <th class="p-2 border">Total Workout Minutes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of filteredUsers" class="border-t">
-          <td class="p-2 border">{{ user.name }}</td>
-          <td class="p-2 border">{{ getUsersWorkOutType(user)}}</td>
-          <td class="p-2 border">{{ user.workouts.length }}</td>
-          <td class="p-2 border">{{ getTotalMinutes(user) }}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
-  
+  <table mat-table [dataSource]="paginatedUsers" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="workouts">
+      <th mat-header-cell *matHeaderCellDef> WorkOuts </th>
+      <td mat-cell *matCellDef="let element"> {{getUsersWorkOutType(element)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="numberOfWorkouts">
+      <th mat-header-cell *matHeaderCellDef>Number of Workouts</th>
+      <td mat-cell *matCellDef="let element"> {{element.workouts.length}} </td>
+    </ng-container>
+    <ng-container matColumnDef="totalWorkoutMinutes">
+      <th mat-header-cell *matHeaderCellDef>Total Workout Minutes</th>
+      <td mat-cell *matCellDef="let element"> {{getTotalMinutes(element)}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+  <div class="flex items-center justify-center mt-[20px] w-[100%] mx-auto">
+    <mat-paginator [length]="filteredUsers.length" [pageSize]="pageSize"
+    [pageSizeOptions]="[1,5, 10, 15, 25, 30, 50, 100]" (page)="handlePageEvent($event)" aria-label="Select page">
+  </mat-paginator>
+  </div>
+
+
+</div>

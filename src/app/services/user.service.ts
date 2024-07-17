@@ -4,33 +4,60 @@ import { User } from '../types/AllType';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class UserService {
-  private users: User[] = [];
+  private users: User[] = [
+      {
+        id: 1,
+        name: 'John Doe',
+        workouts: [
+          { workoutType: 'Running', workoutMinutes: 30 },
+          { workoutType: 'Cycling', workoutMinutes: 45 }
+        ]
+      },
+      {
+        id: 2,
+        name: 'Jane Smith',
+        workouts: [
+          { workoutType: 'Swimming', workoutMinutes: 60 },
+          { workoutType: 'Running', workoutMinutes: 20 }
+        ]
+      },
+      {
+        id: 3,
+        name: 'Mike Johnson',
+        workouts: [
+          { workoutType: 'Yoga', workoutMinutes: 50 },
+          { workoutType: 'Cycling', workoutMinutes: 40 }
+        ]
+      }
+  ];
 
   constructor() {
-    // Retrieve users from localStorage on initialization
     const storedUsers = localStorage.getItem("UsersWorkouts");
     if (storedUsers) {
       this.users = JSON.parse(storedUsers);
     }
   }
-
-  addUserWorkout(name: string, type: string, minutes: number) {
-    // Check if the user already exists in localStorage
-    let userIndex = this.users.findIndex(user => user.name === name);
-    if (userIndex === -1) {
-      // If user does not exist, create a new user object and add it to users array
-      const newUser: User = { name, workouts: [{ workoutType: type, workoutMinutes: minutes }] };
-      this.users.push(newUser);
-    } else {
-      // If user exists, add the new workout to the existing user's workouts array
-      this.users[userIndex].workouts.push({ workoutType: type, workoutMinutes: minutes });
-    }
-
-    // Update localStorage after modifying users array
-    localStorage.setItem("UsersWorkouts", JSON.stringify(this.users));
+  alert(message: string) {
+    alert(message);
   }
 
+
+  addUserWorkout(name: string, type: string, minutes: number) {
+    let userIndex = this.users.findIndex(user => user.name.toLocaleLowerCase() === name.toLocaleLowerCase());
+    if (userIndex === -1) {
+      const newId = this.users.length > 0 ? Math.max(...this.users.map(user => user.id)) + 1 : 1;
+      const newUser: User = { id: newId, name, workouts: [{ workoutType: type, workoutMinutes: minutes }] };
+      this.users.push(newUser);
+      alert(`New workout added for ${name}`);
+    } else {
+      this.users[userIndex].workouts.push({ workoutType: type, workoutMinutes: minutes });
+      alert(`New workout added for ${name}`);
+    }
+    localStorage.setItem("UsersWorkouts", JSON.stringify(this.users));
+  }
   getUsers() {
     return this.users;
   }
